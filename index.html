@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#183d32">
+<title>Cultural Quest | Lemah Duwur</title>
+
+<style>
+:root {
+  --green: #183d32;
+  --green2: #245343;
+  --gold: #d7b56d;
+  --paper: #f3ead5;
+  --ink: #29291f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: #101e19;
+  color: var(--paper);
+  font-family: "Courier New", monospace;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* HEADER */
+
+header {
+  min-height: 72px;
+  padding: 12px 15px 12px 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--green);
+  border-bottom: 3px solid var(--gold);
+  position: relative;
+  z-index: 100;
+}
+
+.brand h1 {
+  color: var(--gold);
+  font-size: clamp(14px, 2.5vw, 21px);
+  letter-spacing: 1px;
+}
+
+.brand p {
+  font-size: 9px;
+  margin-top: 5px;
+  color: #d2d4c8;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-box {
+  font-size: 11px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.header-btn {
+  background: var(--green2);
+  border: 1px solid var(--gold);
+  color: white;
+  padding: 9px;
+  font-size: 10px;
+}
+
+/* BACK MENU */
+
+#menuBtn {
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  width: 38px;
+  height: 38px;
+  background: var(--green2);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  font-size: 22px;
+  z-index: 120;
+}
+
+#menuDropdown {
+  display: none;
+  position: absolute;
+  top: 58px;
+  left: 12px;
+  min-width: 105px;
+  background: var(--paper);
+  border: 2px solid var(--gold);
+  box-shadow: 4px 4px 0 #0005;
+  z-index: 130;
+}
+
+#menuDropdown.show {
+  display: block;
+}
+
+#menuDropdown a {
+  display: block;
+  padding: 13px 17px;
+  color: var(--green);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#menuDropdown a:hover {
+  background: #e3dac3;
+}
+
+/* INTRO */
+
+.intro {
+  text-align: center;
+  padding: 16px;
+  background: #20392f;
+  border-bottom: 1px solid #496454;
+}
+
+.intro .eyebrow {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.intro h2 {
+  font-size: clamp(17px, 3vw, 25px);
+  margin-bottom: 8px;
+}
+
+.intro p {
+  max-width: 650px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d0d5ca;
+}
+
+/* AREA GAME */
+
+#museum {
+  position: relative;
+  width: 100%;
+  height: min(65vh, 600px);
+  min-height: 350px;
+  overflow: hidden;
+  background: #d4c9a8;
+  border-bottom: 4px solid var(--gold);
+  touch-action: none;
+}
+
+#world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2400px;
+  height: 650px;
+  transform-origin: top left;
+}
+
+/* DINDING DAN LANTAI */
+
+.ceiling {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 75px;
+  background: repeating-linear-gradient(
+    90deg, #b5a783 0 100px, #a79772 100px 104px
+  );
+  border-bottom: 8px solid #776b50;
+}
+
+.wall {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 2400px;
+  height: 465px;
+  background:
+    repeating-linear-gradient(
+      90deg, transparent 0 198px, #c3b795 198px 202px
+    ),
+    #ded3b4;
+}
+
+.wall::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .35;
+  background: repeating-linear-gradient(
+    0deg, transparent 0 98px, #a99a76 98px 101px
+  );
+}
+
+.wall-trim {
+  position: absolute;
+  top: 105px;
+  width: 2400px;
+  height: 8px;
+  background: #9d8c66;
+}
+
+.floor {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2400px;
+  height: 110px;
+  background:
+    repeating-linear-gradient(
+      90deg, transparent 0 118px, #88795e 118px 121px
+    ),
+    repeating-linear-gradient(
+      0deg, #b5a17b 0 48px, #a48f69 48px 51px
+    );
+  border-top: 9px solid #7e6b4c;
+}
+
+.lamp {
+  position: absolute;
+  top: 0;
+  width: 7px;
+  height: 45px;
+  background: #64543c;
+}
+
+.lamp::after {
+  content: "";
+  position: absolute;
+  top: 39px;
+  left: -12px;
+  width: 31px;
+  height: 15px;
+  background: #e4c77e;
+  border: 3px solid #8c7045;
+  box-shadow: 0 0 24px #f3d98b88;
+}
+
+/* PAPAN SAMBUTAN */
+
+.sign {
+  position: absolute;
+  left: 100px;
+  top: 145px;
+  width: 280px;
+  padding: 23px;
+  text-align: center;
+  background: var(--green);
+  border: 4px solid var(--gold);
+  box-shadow: 6px 6px 0 #0003;
+}
+
+.sign .small {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+
+.sign h2 {
+  font-size: 22px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.sign p {
+  color: #ddd5c1;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* OBJEK PAMERAN */
+
+.exhibit {
+  position: absolute;
+  top: 145px;
+  width: 340px;
+  text-align: center;
+}
+
+.exhibit-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 300px;
+  height: 245px;
+  margin: auto;
+  background: #e9dfc7;
+  border: 9px solid #6e5535;
+  outline: 3px solid var(--gold);
+  box-shadow: 7px 7px 0 #0003;
+}
+
+.exhibit-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.exhibit-number {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  padding: 5px 7px;
+  color: var(--gold);
+  background: var(--green);
+  font-size: 11px;
+}
+
+.exhibit-label {
+  width: 300px;
+  margin: 18px auto 0;
+  padding: 12px 8px;
+  background: var(--green);
+  border: 2px solid var(--gold);
+  color: var(--paper);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.exhibit-label span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.exhibit.nearby .exhibit-frame {
+  outline: 4px solid #fff0a8;
+  box-shadow: 0 0 24px #ffe49b99;
+}
+
+/* KARAKTER */
+
+#player {
+  position: absolute;
+  bottom: 110px;
+  left: 100px;
+  width: 48px;
+  height: 82px;
+  z-index: 10;
+}
+
+.player-shadow {
+  position: absolute;
+  bottom: -2px;
+  left: 3px;
+  width: 42px;
+  height: 9px;
+  background: #0004;
+  border-radius: 50%;
+}
+
+.sprite {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+}
+
+.head {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 24px;
+  height: 23px;
+  background: #d9a477;
+  border: 3px solid #563d2b;
+}
+
+.hair {
+  position: absolute;
+  top: -3px;
+  left: 9px;
+  width: 30px;
+  height: 12px;
+  background: #33281f;
+  border: 2px solid #33281f;
+}
+
+.eye {
+  position: absolute;
+  top: 10px;
+  left: 29px;
+  width: 4px;
+  height: 4px;
+  background: #29251f;
+}
+
+.body-character {
+  position: absolute;
+  top: 23px;
+  left: 7px;
+  width: 34px;
+  height: 31px;
+  background: #315d4c;
+  border: 3px solid #243e32;
+}
+
+.bag {
+  position: absolute;
+  top: 28px;
+  left: 1px;
+  width: 12px;
+  height: 23px;
+  background: #b8874d;
+  border: 2px solid #64472b;
+}
+
+.arm {
+  position: absolute;
+  top: 27px;
+  left: 0;
+  width: 9px;
+  height: 25px;
+  background: #d9a477;
+  border: 2px solid #563d2b;
+}
+
+.arm.right {
+  left: 39px;
+}
+
+.leg {
+  position: absolute;
+  top: 52px;
+  left: 11px;
+  width: 10px;
+  height: 23px;
+  background: #373d45;
+  border: 2px solid #24292f;
+}
+
+.leg.right {
+  left: 28px;
+}
+
+.shoe {
+  position: absolute;
+  top: 71px;
+  left: 8px;
+  width: 16px;
+  height: 8px;
+  background: #49372b;
+}
+
+.shoe.right {
+  left: 25px;
+}
+
+#player.walking .leg {
+  animation: walk .18s infinite alternate;
+}
+
+#player.walking .leg.right {
+  animation-delay: .18s;
+}
+
+#player.facing-left .sprite {
+  transform: scaleX(-1);
+}
+
+@keyframes walk {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
+}
+
+/* HUD */
+
+.hud {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 20;
+  padding: 10px 12px;
+  background: #183d32ed;
+  border: 1px solid var(--gold);
+  color: var(--paper);
+  font-size: 10px;
+  line-height: 1.8;
+  pointer-events: none;
+}
+
+.hud strong {
+  color: var(--gold);
+}
+
+/* TOMBOL DI DALAM LAYAR GAME */
+
+.game-controls {
+  position: absolute;
+  bottom: 18px;
+  left: 16px;
+  z-index: 40;
+  display: flex;
+  gap: 10px;
+}
+
+.move-btn {
+  width: 54px;
+  height: 54px;
+  background: #183d32e8;
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  color: white;
+  font-size: 22px;
+  user-select: none;
+  touch-action: none;
+}
+
+.move-btn:active {
+  background: #47745d;
+}
+
+.interact-btn {
+  position: absolute;
+  right: 16px;
+  bottom: 18px;
+  z-index: 40;
+  min-width: 105px;
+  min-height: 54px;
+  padding: 8px;
+  background: #183d32e8;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 85px;
+  transform: translateX(-50%);
+  z-index: 30;
+  width: max-content;
+  max-width: calc(100% - 30px);
+  padding: 9px 12px;
+  background: #183d32ed;
+  border: 1px solid var(--gold);
+  color: var(--paper);
+  font-size: 10px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 18px;
+  text-align: center;
+  color: #aaaF9f;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+footer strong {
+  color: var(--gold);
+}
+
+/* PANEL INFORMASI */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #09130ff0;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-card {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--paper);
+  color: var(--ink);
+  border: 4px solid var(--gold);
+  box-shadow: 8px 8px 0 #0006;
+}
+
+.modal-header {
+  padding: 18px 55px 18px 20px;
+  background: var(--green);
+  color: var(--paper);
+  border-bottom: 3px solid var(--gold);
+}
+
+.modal-kicker {
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.modal-header h2 {
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: #345a47;
+  border: 1px solid var(--gold);
+  color: white;
+  font-size: 20px;
+}
+
+.modal-body {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.modal-body p {
+  margin-bottom: 14px;
+}
+
+.modal-body h3 {
+  margin: 17px 0 5px;
+  color: var(--green);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
+
+.modal-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  border-top: 1px solid #c9bea5;
+}
+
+.modal-bottom p {
+  color: #666;
+  font-size: 10px;
+}
+
+.modal-bottom button {
+  padding: 11px 15px;
+  background: var(--green);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 11px;
+}
+
+.source-link {
+  color: #1e5943;
+  font-weight: bold;
+}
+
+/* KUIS */
+
+.quiz-options {
+  display: grid;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.quiz-option {
+  width: 100%;
+  padding: 12px;
+  background: #fffaf0;
+  border: 2px solid #c5b897;
+  color: var(--ink);
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.quiz-option:disabled {
+  opacity: .85;
+}
+
+.quiz-result {
+  margin-top: 15px;
+  padding: 12px;
+  background: #e4e0ce;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  header {
+    padding-right: 9px;
+    gap: 5px;
+  }
+
+  .brand h1 {
+    letter-spacing: 0;
+  }
+
+  .brand p {
+    font-size: 8px;
+  }
+
+  .score-box {
+    font-size: 9px;
+  }
+
+  .header-btn {
+    padding: 8px 5px;
+    font-size: 9px;
+  }
+
+  #museum {
+    height: 58vh;
+    min-height: 350px;
+  }
+
+  .game-controls {
+    left: 10px;
+    bottom: 12px;
+    gap: 7px;
+  }
+
+  .move-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .interact-btn {
+    right: 10px;
+    bottom: 12px;
+    min-width: 85px;
+    min-height: 48px;
+    font-size: 10px;
+  }
+
+  .hint {
+    bottom: 70px;
+    font-size: 9px;
+  }
+
+  .modal-body {
+    padding: 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .score-box {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button id="menuBtn" type="button"
+    aria-label="Buka menu" aria-expanded="false">⋮</button>
+
+  <div id="menuDropdown">
+    <a href="https://culturalheritage.vercel.app/#insights">Back</a>
+  </div>
+
+  <div class="brand">
+    <h1>CULTURAL QUEST</h1>
+    <p>DIGITAL HERITAGE EXPERIENCE</p>
+  </div>
+
+  <div class="header-right">
+    <div class="score-box">
+      OBJEK: <span id="score">0</span>/3
+    </div>
+    <button class="header-btn" id="fullscreenBtn" type="button">
+      ⛶ FULLSCREEN
+    </button>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">CULTURE • HISTORY • EXPLORATION</div>
+  <h2>Museum Lemah Duwur</h2>
+  <p>
+    Jelajahi museum, dekati objek peninggalan, dan temukan
+    keunikan, nilai sejarah, serta fakta menariknya.
+  </p>
+</section>
+
+<main>
+  <section id="museum" aria-label="Area permainan museum">
+
+    <div id="world">
+      <div class="ceiling"></div>
+      <div class="wall"></div>
+      <div class="wall-trim"></div>
+      <div class="floor"></div>
+
+      <div class="lamp" style="left:430px"></div>
+      <div class="lamp" style="left:980px"></div>
+      <div class="lamp" style="left:1600px"></div>
+      <div class="lamp" style="left:2220px"></div>
+
+      <div class="sign">
+        <div class="small">SELAMAT DATANG</div>
+        <h2>JEJAK<br>LEMAH DUWUR</h2>
+        <p>Kenali warisan sejarah melalui perjalanan eksplorasi digital.</p>
+      </div>
+
+      <!-- OBJEK 1 -->
+      <div class="exhibit" style="left:500px" data-id="0">
+        <div class="exhibit-frame">
+          <div class="exhibit-number">01</div>
+          <img
+            src="https://raw.githubusercontent.com/redbals359-cyber/culturalquest/main/Candi%20lemah%20duwur%20.png"
+            alt="Candi Lemah Duwur">
+        </div>
+        <div class="exhibit-label">
+          <span>OBJEK PERTAMA</span>
+          Lemah Duwur
+        </div>
+      </div>
+
+      <!-- OBJEK 2 -->
+      <div class="exhibit" style="left:1120px" data-id="1">
+        <div class="exhibit-frame">
+          <div class="exhibit-number">02</div>
+          <img
+            src="https://raw.githubusercontent.com/redbals359-cyber/culturalquest/main/Batu%20bata.png"
+            alt="Batu bata merah">
+        </div>
+        <div class="exhibit-label">
+          <span>OBJEK KEDUA</span>
+          Batu Bata Merah
+        </div>
+      </div>
+
+      <!-- OBJEK 3 -->
+      <div class="exhibit" style="left:1740px" data-id="2">
+        <div class="exhibit-frame">
+          <div class="exhibit-number">03</div>
+          <img
+            src="https://raw.githubusercontent.com/redbals359-cyber/culturalquest/main/Struktur%20bangunan%20.png"
+            alt="Struktur bangunan Candi Lemah Duwur">
+        </div>
+        <div class="exhibit-label">
+          <span>OBJEK KETIGA</span>
+          Struktur Bangunan
+        </div>
+      </div>
+
+      <!-- KARAKTER -->
+      <div id="player" aria-label="Karakter pemain">
+        <div class="player-shadow"></div>
+        <div class="sprite">
+          <div class="hair"></div>
+          <div class="head"></div>
+          <div class="eye"></div>
+          <div class="body-character"></div>
+          <div class="bag"></div>
+          <div class="arm"></div>
+          <div class="arm right"></div>
+          <div class="leg"></div>
+          <div class="leg right"></div>
+          <div class="shoe"></div>
+          <div class="shoe right"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud">
+      <div><strong>AREA:</strong> MUSEUM</div>
+      <div><strong>STATUS:</strong> <span id="status">MENJELAJAH</span></div>
+      <div><strong>OBJEK:</strong> <span id="nearbyText">Belum ditemukan</span></div>
+    </div>
+
+    <div class="hint" id="hint">
+      GERAKKAN KARAKTER DAN DEKATI OBJEK
+    </div>
+
+    <!-- TOMBOL DI DALAM LAYAR -->
+    <div class="game-controls">
+      <button class="move-btn" id="leftBtn"
+        aria-label="Bergerak ke kiri">◀</button>
+      <button class="move-btn" id="rightBtn"
+        aria-label="Bergerak ke kanan">▶</button>
+    </div>
+
+    <button class="interact-btn" id="interactBtn">
+      ⓘ INTERAKSI
+    </button>
+
+  </section>
+</main>
+
+<footer>
+  <strong>CULTURAL QUEST</strong><br>
+  Media digital untuk pengenalan warisan budaya.
+</footer>
+
+<!-- PANEL INFORMASI -->
+
+<div class="modal" id="infoModal" role="dialog"
+  aria-modal="true" aria-labelledby="modalTitle">
+
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-kicker" id="modalKicker">CULTURAL ARCHIVE</div>
+      <h2 id="modalTitle">Informasi Objek</h2>
+      <button class="close-btn" id="closeModal"
+        aria-label="Tutup panel">×</button>
+    </div>
+
+    <div class="modal-body" id="modalBody"></div>
+
+    <div class="modal-bottom">
+      <p id="modalProgress">PROGRES: 0/3</p>
+      <button id="modalDone">SELESAI MEMBACA</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL KUIS -->
+
+<div class="modal" id="quizModal" role="dialog"
+  aria-modal="true" aria-labelledby="quizTitle">
+
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-kicker">KNOWLEDGE CHALLENGE</div>
+      <h2 id="quizTitle">Kuis Budaya</h2>
+      <button class="close-btn" id="closeQuiz"
+        aria-label="Tutup kuis">×</button>
+    </div>
+
+    <div class="modal-body">
+      <p id="quizQuestion"></p>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-result" id="quizResult" hidden></div>
+    </div>
+
+    <div class="modal-bottom">
+      <p>UJI PEMAHAMANMU</p>
+      <button id="quizNext" hidden>BERIKUTNYA</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* DATA INFORMASI OBJEK */
+
+const exhibits = [
+  {
+    title: "Lemah Duwur",
+    kicker: "OBJEK 01 • PENGENALAN SITUS",
+    sections: [
+      {
+        title: "Deskripsi Candi Lemah Dhuwur",
+        text: "Candi Lemah Duwur adalah salah satu cagar budaya penting yang terletak di Kabupaten Sidoarjo, Jawa Timur. Situs bersejarah ini menjadi saksi kekayaan peradaban Nusantara masa lampau yang menarik untuk dipelajari."
+      },
+      {
+        title: "Keunikan",
+        text: "Candi Lemah Dhuwur memiliki keunikan berupa gundukan tanah yang lebih tinggi dibandingkan area sekitarnya. Di atasnya terdapat sisa struktur bata merah yang dinaungi pohon beringin tua, menciptakan perpaduan menarik antara peninggalan sejarah dan alam."
+      },
+      {
+        title: "Nilai Sejarah",
+        text: "Kondisi tanah dan reruntuhan candi menjadi bagian penting dalam mengkaji bentuk serta perkembangan situs pada masa kerajaan."
+      },
+      {
+        title: "Fakta Menarik",
+        text: "Nama Lemah Dhuwur bermakna “tanah tinggi”. Namun, asal-usul terbentuknya gundukan tersebut masih perlu dikaji untuk memastikan kaitannya dengan struktur asli candi."
+      }
+    ]
+  },
+
+  {
+    title: "Batu Bata Merah",
+    kicker: "OBJEK 02 • MATERIAL BANGUNAN",
+    sections: [
+      {
+        title: "Keunikan",
+        text: "Batu bata Candi Lemah Dhuwur memiliki ukuran yang tidak biasa untuk bata modern, yaitu sekitar 37 cm panjang, 24 cm lebar, dan 10 cm tebal. Ukurannya yang besar serta warna merah terakota membuat material ini menjadi salah satu bagian paling menarik untuk diamati."
+      },
+      {
+        title: "Nilai Sejarah",
+        text: "Penggunaan bata merah menunjukkan pemanfaatan tanah liat sebagai bahan bangunan sekaligus menggambarkan keterampilan masyarakat masa lampau dalam mengembangkan teknik konstruksi."
+      },
+      {
+        title: "Fakta Menarik",
+        text: "Bata merah pada bangunan kuno dapat disusun menggunakan teknik tertentu tanpa bergantung pada semen modern. Susunan bata yang masih bertahan menjadi petunjuk berharga untuk mempelajari metode pembangunan pada masa lalu."
+      }
+    ]
+  },
+
+  {
+    title: "Struktur Bangunan",
+    kicker: "OBJEK 03 • ARSITEKTUR KUNO",
+    sections: [
+      {
+        title: "Keunikan",
+        text: "Candi Lemah Dhuwur memiliki posisi yang khas, berdiri di atas gundukan tanah yang lebih tinggi di tengah persawahan Desa Pamotan, Porong. Situs ini juga dikenal dengan keberadaan pohon beringin besar yang menaungi reruntuhannya, menciptakan perpaduan unik antara warisan sejarah dan alam."
+      },
+      {
+        title: "Nilai Sejarah",
+        text: "Keberadaan batu lingga menjadi petunjuk penting mengenai kaitan situs ini dengan tradisi keagamaan Hindu pada masa lampau. Struktur yang tersisa juga membantu para peneliti mengkaji perkembangan arsitektur kuno di wilayah Sidoarjo."
+      },
+      {
+        title: "Fakta Menarik",
+        text: "Waktu telah mengubah penampilan candi ini. Bagian bangunan yang tersisa kini berupa struktur bawah dan fondasi. Meski tidak lagi utuh, sisa-sisanya tetap menyimpan petunjuk tentang bentuk bangunan pada masa lalu."
+      }
+    ]
+  }
+];
+
+/* DATA KUIS */
+
+const quizData = [
+  {
+    question: "Apa arti nama Lemah Dhuwur?",
+    options: [
+      "Tanah tinggi",
+      "Batu merah",
+      "Pohon besar",
+      "Tanah basah"
+    ],
+    answer: 0,
+    explanation: "Lemah Dhuwur bermakna tanah tinggi."
+  },
+  {
+    question: "Bahan apa yang menjadi salah satu ciri menarik situs ini?",
+    options: [
+      "Kaca modern",
+      "Bata merah",
+      "Baja ringan",
+      "Plastik"
+    ],
+    answer: 1,
+    explanation: "Sisa struktur bata merah merupakan bagian yang menarik untuk diamati."
+  },
+  {
+    question: "Apa yang bisa dipelajari dari struktur bangunan kuno?",
+    options: [
+      "Teknik konstruksi masa lalu",
+      "Teknologi telepon modern",
+      "Cuaca setiap hari",
+      "Jumlah penduduk saat ini"
+    ],
+    answer: 0,
+    explanation: "Struktur yang tersisa dapat membantu kajian mengenai arsitektur dan teknik konstruksi masa lalu."
+  }
+];
+
+/* ELEMEN */
+
+const museum = document.getElementById("museum");
+const world = document.getElementById("world");
+const player = document.getElementById("player");
+
+const scoreElement = document.getElementById("score");
+const statusElement = document.getElementById("status");
+const nearbyText = document.getElementById("nearbyText");
+const hint = document.getElementById("hint");
+
+const infoModal = document.getElementById("infoModal");
+const quizModal = document.getElementById("quizModal");
+
+const exhibitPositions = [670, 1290, 1910];
+
+const WORLD_WIDTH = 2400;
+const PLAYER_WIDTH = 48;
+
+let playerX = 100;
+let movingLeft = false;
+let movingRight = false;
+let currentNearby = -1;
+let score = 0;
+let scale = 1;
+let cameraX = 0;
+let lastTime = 0;
+let currentQuiz = 0;
+let quizAnswered = false;
+
+const discovered = new Set();
+
+/* MENU BACK */
+
+const menuBtn = document.getElementById("menuBtn");
+const menuDropdown = document.getElementById("menuDropdown");
+
+menuBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+
+  const open = menuDropdown.classList.toggle("show");
+  menuBtn.setAttribute("aria-expanded", String(open));
+});
+
+document.addEventListener("click", (event) => {
+  if (
+    !menuBtn.contains(event.target) &&
+    !menuDropdown.contains(event.target)
+  ) {
+    menuDropdown.classList.remove("show");
+    menuBtn.setAttribute("aria-expanded", "false");
+  }
+});
+
+/* FULLSCREEN */
+
+document.getElementById("fullscreenBtn").addEventListener("click", async () => {
+  try {
+    if (!document.fullscreenElement) {
+      await document.documentElement.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
+    }
+  } catch (error) {
+    console.warn("Fullscreen tidak tersedia", error);
+  }
+
+  setTimeout(updateScale, 100);
+});
+
+document.addEventListener("fullscreenchange", updateScale);
+window.addEventListener("resize", updateScale);
+
+/* SKALA DAN KAMERA */
+
+function updateScale() {
+  scale = Math.min(
+    museum.clientWidth / 1000,
+    museum.clientHeight / 650,
+    1
+  );
+
+  scale = Math.max(scale, 0.35);
+  render();
+}
+
+function render() {
+  const viewWidth = museum.clientWidth / scale;
+
+  cameraX = Math.max(
+    -(WORLD_WIDTH - viewWidth),
+    Math.min(0, -(playerX - viewWidth / 2))
+  );
+
+  world.style.transform =
+    `scale(${scale}) translateX(${cameraX}px)`;
+
+  player.style.left = playerX + "px";
+}
+
+/* GERAKAN KARAKTER */
+
+function setDirection(direction, active) {
+  if (direction === "left") movingLeft = active;
+  if (direction === "right") movingRight = active;
+
+  player.classList.toggle(
+    "walking",
+    movingLeft || movingRight
+  );
+}
+
+function bindMoveButton(id, direction) {
+  const button = document.getElementById(id);
+
+  button.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+
+    try {
+      button.setPointerCapture(event.pointerId);
+    } catch (_) {}
+
+    setDirection(direction, true);
+  });
+
+  const stop = () => setDirection(direction, false);
+
+  button.addEventListener("pointerup", stop);
+  button.addEventListener("pointercancel", stop);
+  button.addEventListener("lostpointercapture", stop);
+}
+
+bindMoveButton("leftBtn", "left");
+bindMoveButton("rightBtn", "right");
+
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "ArrowLeft" ||
+    event.key.toLowerCase() === "a"
+  ) {
+    event.preventDefault();
+    setDirection("left", true);
+  }
+
+  if (
+    event.key === "ArrowRight" ||
+    event.key.toLowerCase() === "d"
+  ) {
+    event.preventDefault();
+    setDirection("right", true);
+  }
+
+  if (
+    (event.key === "Enter" || event.key === " ") &&
+    !infoModal.classList.contains("show") &&
+    !quizModal.classList.contains("show")
+  ) {
+    event.preventDefault();
+    interact();
+  }
+
+  if (event.key === "Escape") {
+    closeAllModals();
+  }
+});
+
+document.addEventListener("keyup", (event) => {
+  if (
+    event.key === "ArrowLeft" ||
+    event.key.toLowerCase() === "a"
+  ) {
+    setDirection("left", false);
+  }
+
+  if (
+    event.key === "ArrowRight" ||
+    event.key.toLowerCase() === "d"
+  ) {
+    setDirection("right", false);
+  }
+});
+
+window.addEventListener("blur", () => {
+  setDirection("left", false);
+  setDirection("right", false);
+});
+
+/* LOOP GAME */
+
+function gameLoop(timestamp) {
+  const delta = lastTime
+    ? Math.min((timestamp - lastTime) / 16.67, 2)
+    : 1;
+
+  lastTime = timestamp;
+
+  if (
+    !infoModal.classList.contains("show") &&
+    !quizModal.classList.contains("show")
+  ) {
+    const speed = 4 * delta;
+
+    if (movingLeft) {
+      playerX -= speed;
+      player.classList.add("facing-left");
+    }
+
+    if (movingRight) {
+      playerX += speed;
+      player.classList.remove("facing-left");
+    }
+
+    playerX = Math.max(
+      10,
+      Math.min(WORLD_WIDTH - PLAYER_WIDTH - 10, playerX)
+    );
+
+    updateNearby();
+    render();
+  }
+
+  requestAnimationFrame(gameLoop);
+}
+
+/* DETEKSI OBJEK */
+
+function updateNearby() {
+  let nearest = -1;
+  let nearestDistance = Infinity;
+
+  exhibitPositions.forEach((position, index) => {
+    const distance = Math.abs(
+      playerX + PLAYER_WIDTH / 2 - position
+    );
+
+    if (distance < nearestDistance) {
+      nearestDistance = distance;
+      nearest = index;
+    }
+  });
+
+  if (nearestDistance <= 145) {
+    currentNearby = nearest;
+
+    nearbyText.textContent = exhibits[nearest].title;
+    statusElement.textContent = "OBJEK DITEMUKAN";
+
+    hint.textContent =
+      "OBJEK: " + exhibits[nearest].title +
+      " — TEKAN INTERAKSI";
+  } else {
+    currentNearby = -1;
+    nearbyText.textContent = "Belum ditemukan";
+    statusElement.textContent = "MENJELAJAH";
+
+    hint.textContent =
+      score === 3
+        ? "SEMUA OBJEK DIPELAJARI — TEKAN DI SINI UNTUK KUIS"
+        : "GERAKKAN KARAKTER DAN DEKATI OBJEK";
+  }
+
+  document.querySelectorAll(".exhibit").forEach((element, index) => {
+    element.classList.toggle("nearby", index === currentNearby);
+  });
+}
+
+/* INTERAKSI */
+
+document.getElementById("interactBtn").addEventListener("click", interact);
+
+function interact() {
+  if (currentNearby === -1) {
+    hint.textContent = "DEKATI OBJEK PAMERAN TERLEBIH DAHULU";
+    return;
+  }
+
+  openExhibit(currentNearby);
+}
+
+function openExhibit(index) {
+  const exhibit = exhibits[index];
+
+  document.getElementById("modalKicker").textContent = exhibit.kicker;
+  document.getElementById("modalTitle").textContent = exhibit.title;
+
+  const body = document.getElementById("modalBody");
+  body.innerHTML = "";
+
+  exhibit.sections.forEach((section) => {
+    const heading = document.createElement("h3");
+    heading.textContent = section.title;
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = section.text;
+
+    body.appendChild(heading);
+    body.appendChild(paragraph);
+  });
+
+  if (!discovered.has(index)) {
+    discovered.add(index);
+    score = discovered.size;
+    scoreElement.textContent = score;
+  }
+
+  document.getElementById("modalProgress").textContent =
+    `PROGRES EKSPLORASI: ${score}/3`;
+
+  infoModal.classList.add("show");
+  statusElement.textContent = "MEMPELAJARI OBJEK";
+}
+
+/* TUTUP PANEL */
+
+function closeAllModals() {
+  infoModal.classList.remove("show");
+  quizModal.classList.remove("show");
+  statusElement.textContent = "MENJELAJAH";
+}
+
+document.getElementById("closeModal").addEventListener(
+  "click", closeAllModals
+);
+
+document.getElementById("modalDone").addEventListener("click", () => {
+  closeAllModals();
+
+  if (score === 3) {
+    hint.textContent =
+      "SEMUA OBJEK DIPELAJARI — TEKAN DI SINI UNTUK KUIS";
+  }
+});
+
+document.getElementById("closeQuiz").addEventListener(
+  "click", closeAllModals
+);
+
+infoModal.addEventListener("click", (event) => {
+  if (event.target === infoModal) closeAllModals();
+});
+
+quizModal.addEventListener("click", (event) => {
+  if (event.target === quizModal) closeAllModals();
+});
+
+/* KUIS */
+
+function openQuiz() {
+  currentQuiz = 0;
+  showQuizQuestion();
+  quizModal.classList.add("show");
+}
+
+function showQuizQuestion() {
+  quizAnswered = false;
+
+  const question = quizData[currentQuiz];
+
+  document.getElementById("quizTitle").textContent =
+    `Kuis Budaya ${currentQuiz + 1}/${quizData.length}`;
+
+  document.getElementById("quizQuestion").textContent =
+    question.question;
+
+  const options = document.getElementById("quizOptions");
+  const result = document.getElementById("quizResult");
+  const next = document.getElementById("quizNext");
+
+  options.innerHTML = "";
+  result.hidden = true;
+  result.textContent = "";
+  next.hidden = true;
+
+  question.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "quiz-option";
+    button.textContent = option;
+
+    button.addEventListener("click", () => {
+      if (quizAnswered) return;
+
+      quizAnswered = true;
+
+      const correct = index === question.answer;
+
+      result.hidden = false;
+      result.textContent =
+        (correct ? "BENAR! " : "BELUM TEPAT. ") +
+        question.explanation;
+
+      button.style.borderColor = correct ? "#2b7550" : "#a64b40";
+
+      if (correct) button.style.background = "#d8ead8";
+
+      options.querySelectorAll("button").forEach((item) => {
+        item.disabled = true;
+      });
+
+      next.hidden = false;
+      next.textContent =
+        currentQuiz < quizData.length - 1
+          ? "PERTANYAAN BERIKUTNYA"
+          : "SELESAI";
+    });
+
+    options.appendChild(button);
+  });
+}
+
+document.getElementById("quizNext").addEventListener("click", () => {
+  if (currentQuiz < quizData.length - 1) {
+    currentQuiz++;
+    showQuizQuestion();
+  } else {
+    closeAllModals();
+    hint.textContent = "KUIS SELESAI — TERIMA KASIH TELAH MENJELAJAH";
+  }
+});
+
+/* BUKA KUIS SETELAH SEMUA OBJEK DIPELAJARI */
+
+hint.addEventListener("click", () => {
+  if (score === 3 && currentNearby === -1) {
+    openQuiz();
+  }
+});
+
+/* MULAI GAME */
+
+updateScale();
+updateNearby();
+requestAnimationFrame(gameLoop);
+</script>
+
+</body>
+</html>

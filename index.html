@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173f35">
+  <title>Pilih Museum Virtual | Cultural Heritage</title>
+
+  <style>
+    :root {
+      --green: #173f35;
+      --brick: #a64d37;
+      --cream: #f6f4ed;
+      --white: #fffefa;
+      --muted: #69736d;
+      --line: #e4e2d8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 28px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cream);
+      color: #202923;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+      margin: auto;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .eyebrow {
+      color: var(--brick);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      color: var(--green);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      min-height: 290px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 8px 25px rgba(28, 47, 36, 0.05);
+      transition: transform 0.2s, border-color 0.2s,
+                  box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--green);
+      box-shadow: 0 14px 30px rgba(28, 47, 36, 0.1);
+    }
+
+    .card:focus-visible {
+      outline: 3px solid var(--brick);
+      outline-offset: 4px;
+    }
+
+    .card-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .number {
+      color: var(--brick);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e8eee8;
+      color: var(--green);
+      font-size: 23px;
+    }
+
+    h2 {
+      color: var(--green);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .enter {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+      margin-top: auto;
+    }
+
+    .enter span {
+      display: inline-block;
+      margin-left: 5px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover .enter span {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 620px) {
+      body {
+        padding: 24px 16px;
+      }
+
+      .heading {
+        margin-bottom: 24px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      .choices {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .card {
+        min-height: 0;
+        padding: 23px;
+      }
+
+      .card-top {
+        margin-bottom: 18px;
+      }
+
+      h2 {
+        font-size: 25px;
+      }
+
+      .description {
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header class="heading">
+      <p class="eyebrow">
+        CULTURAL HERITAGE · CANDI LEMAH DUWUR
+      </p>
+
+      <h1>Pilih Museum Virtual</h1>
+
+      <p class="subtitle">
+        Pilih pengalaman untuk mulai menjelajahi warisan budaya.
+      </p>
+    </header>
+
+    <section class="choices" aria-label="Pilihan museum virtual">
+
+      <!-- PILIHAN MUSEUM 3D -->
+      <a
+        class="card"
+        href="https://virtualrealitycandilemahduwur.vercel.app/"
+      >
+        <div class="card-top">
+          <span class="number">PILIHAN 01</span>
+          <span class="icon" aria-hidden="true">◇</span>
+        </div>
+
+        <h2>Virtual Museum 3D</h2>
+
+        <p class="description">
+          Jelajahi Candi Lemah Duwur melalui pengalaman
+          museum virtual tiga dimensi.
+        </p>
+
+        <span class="enter">
+          Masuk ke Museum 3D <span aria-hidden="true">↗</span>
+        </span>
+      </a>
+
+      <!-- PILIHAN MUSEUM 2D -->
+      <a
+        class="card"
+        href="https://2dmuseumvirtual.vercel.app/"
+      >
+        <div class="card-top">
+          <span class="number">PILIHAN 02</span>
+          <span class="icon" aria-hidden="true">▦</span>
+        </div>
+
+        <h2>Virtual Museum 2D</h2>
+
+        <p class="description">
+          Jelajahi museum digital melalui permainan
+          interaktif dan temukan informasi tentang warisan budaya.
+        </p>
+
+        <span class="enter">
+          Masuk ke Museum 2D <span aria-hidden="true">↗</span>
+        </span>
+      </a>
+
+    </section>
+  </main>
+</body>
+</html>
